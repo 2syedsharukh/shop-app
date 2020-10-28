@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/product.dart';
+import 'package:shop_app/utils/scroll_behaviour.dart';
 import 'package:shop_app/widgets/product_item.dart';
 
 class ProductOverview extends StatelessWidget {
@@ -51,21 +52,24 @@ class ProductOverview extends StatelessWidget {
       backgroundColor: Color(0xFF0336FF),
       body: Container(
         padding: EdgeInsets.only(top: 40.0, left: 10.0, right: 10.0),
-        child: GridView.builder(
-          itemCount: loadedProducts.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.55,
-            crossAxisSpacing: 10,
-            // mainAxisSpacing: 10,
+        child: ScrollConfiguration(
+          behavior: MyScrollBehaviour(),
+          child: GridView.builder(
+            itemCount: loadedProducts.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.55,
+              crossAxisSpacing: 10,
+              // mainAxisSpacing: 10,
+            ),
+            itemBuilder: (context, index) => Container(
+                child: ProductItem(
+              imageUrl: loadedProducts[index].imageUrl,
+              title: loadedProducts[index].title,
+              description: loadedProducts[index].description,
+              price: loadedProducts[index].price,
+            )),
           ),
-          itemBuilder: (context, index) => Container(
-              child: ProductItem(
-            imageUrl: loadedProducts[index].imageUrl,
-            title: loadedProducts[index].title,
-            description: loadedProducts[index].description,
-            price: loadedProducts[index].price,
-          )),
         ),
       ),
     );

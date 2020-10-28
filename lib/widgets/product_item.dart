@@ -17,12 +17,27 @@ class ProductItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.2,
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-            ),
+          Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                right: 0,
+                top: 0,
+                child: IconButton(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.favorite_border,
+                    color: Color(0xFF0336FF),
+                  ),
+                ),
+              ),
+            ],
           ),
           Text(
             title.toUpperCase(),
@@ -45,23 +60,35 @@ class ProductItem extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 15.0),
+            padding: const EdgeInsets.only(bottom: 10.0, left: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.attach_money,
-                  size: 18,
-                  color: Color(0xFF0336FF),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.attach_money,
+                      size: 18,
+                      color: Color(0xFF0336FF),
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Text(
+                      price.toString(),
+                      style: GoogleFonts.montserrat(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF0336FF),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 2,
-                ),
-                Text(
-                  price.toString(),
-                  style: GoogleFonts.montserrat(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.shopping_cart,
                     color: Color(0xFF0336FF),
                   ),
                 ),
