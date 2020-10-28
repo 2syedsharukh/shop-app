@@ -2,40 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/models/product.dart';
 import 'package:shop_app/widgets/product_item.dart';
 
-
 class ProductOverview extends StatelessWidget {
   final List<Product> loadedProducts = [
     Product(
       id: 'p1',
-      title: 'Red Shirt',
-      description: 'A red shirt - it is pretty red!',
+      title: 'Gucci Bag',
+      description: 'A Black Gucci leather shoulder bag',
       price: 29.99,
       imageUrl:
-      'https://images.unsplash.com/photo-1603281281505-c6045022f6aa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80',
+          'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80',
     ),
     Product(
       id: 'p2',
-      title: 'Trousers',
-      description: 'A nice pair of trousers.',
+      title: 'Analog Watch',
+      description: 'Round black analog watch on stone',
       price: 59.99,
       imageUrl:
-      'https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1289&q=80',
+          'https://images.unsplash.com/photo-1495856458515-0637185db551?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
     ),
     Product(
       id: 'p3',
       title: 'Yellow Scarf',
-      description: 'Warm and cozy - exactly what you need for the winter.',
+      description: 'Warm and cozy for winter.',
       price: 19.99,
       imageUrl:
-      'https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg',
+          'https://images.unsplash.com/photo-1519759884506-08104e503831?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
     ),
     Product(
       id: 'p4',
-      title: 'A Pan',
-      description: 'Prepare any meal you want.',
+      title: 'Sneaker',
+      description: 'Black and white New Balance low-top sneaker',
       price: 49.99,
       imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+          'https://images.unsplash.com/photo-1539185441755-769473a23570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80',
+    ),
+    Product(
+      id: 'p5',
+      title: 'Black Umbrella',
+      description: 'Umbrella for rainy days',
+      price: 49.99,
+      imageUrl:
+          'https://images.unsplash.com/photo-1513866717996-6c19fd870937?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80',
     ),
   ];
   @override
@@ -43,15 +50,22 @@ class ProductOverview extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF0336FF),
       body: Container(
+        padding: EdgeInsets.only(top: 40.0, left: 10.0, right: 10.0),
         child: GridView.builder(
           itemCount: loadedProducts.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 1,
+            childAspectRatio: 0.55,
             crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+            // mainAxisSpacing: 10,
           ),
-          itemBuilder: (context, index) => Container(child: ProductItem(imageUrl: loadedProducts[index].imageUrl,title: loadedProducts[index].title,)),
+          itemBuilder: (context, index) => Container(
+              child: ProductItem(
+            imageUrl: loadedProducts[index].imageUrl,
+            title: loadedProducts[index].title,
+            description: loadedProducts[index].description,
+            price: loadedProducts[index].price,
+          )),
         ),
       ),
     );
