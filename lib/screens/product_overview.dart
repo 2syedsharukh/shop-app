@@ -64,6 +64,7 @@ class ProductOverview extends StatelessWidget {
             ),
             itemBuilder: (context, index) => Container(
                 child: ProductItem(
+              id: loadedProducts[index].id,
               imageUrl: loadedProducts[index].imageUrl,
               title: loadedProducts[index].title,
               description: loadedProducts[index].description,
