@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Product>(context);
+    final productsData = Provider.of<Product>(context, listen: false);
+
     return Stack(
       children: [
         GestureDetector(
@@ -99,10 +100,12 @@ class ProductItem extends StatelessWidget {
             child: CircleAvatar(
               child: InkWell(
                 onTap: () => productsData.isFavouriteToggle(),
-                child: Icon(
-                  productsData.isFavourite
-                      ? Icons.favorite
-                      : Icons.favorite_border,
+                child: Consumer<Product>(
+                  builder: (context, productsData, child) => Icon(
+                    productsData.isFavourite
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                  ),
                 ),
               ),
               backgroundColor: Colors.white,
