@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_app/provider/product.dart';
 import 'package:shop_app/screens/product_details.dart';
+import 'package:provider/provider.dart';
 
 class ProductItem extends StatelessWidget {
-  final String id;
-  final String imageUrl;
-  final String title;
-  final String description;
-  final double price;
-
-  ProductItem(
-      {this.id, this.imageUrl, this.price, this.title, this.description});
-
   @override
   Widget build(BuildContext context) {
+    final productsData = Provider.of<Product>(context);
     return Stack(
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .pushNamed(ProductDetails.routeName, arguments: id);
+            Navigator.of(context).pushNamed(ProductDetails.routeName,
+                arguments: productsData.id);
           },
           child: Container(
             color: Colors.white,
@@ -27,32 +21,17 @@ class ProductItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      child: Image.network(
-                        imageUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Positioned(
-                      right: 0,
-                      top: 0,
-                      child: IconButton(
-                        onPressed: () => {},
-                        icon: Icon(
-                          Icons.favorite_border,
-                          color: Color(0xFF0336FF),
-                        ),
-                      ),
-                    ),
-                  ],
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Image.network(
+                    productsData.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Text(
-                    title.toUpperCase(),
+                    productsData.title.toUpperCase(),
                     style: GoogleFonts.montserrat(
                       color: Color(0xFF0336FF),
                       fontSize: 16.0,
@@ -64,7 +43,7 @@ class ProductItem extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(bottom: 10.0, left: 5, right: 5),
                   child: Text(
-                    description,
+                    productsData.description,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.montserrat(
@@ -91,7 +70,7 @@ class ProductItem extends StatelessWidget {
                             width: 2,
                           ),
                           Text(
-                            price.toString(),
+                            productsData.price.toString(),
                             style: GoogleFonts.montserrat(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -118,7 +97,14 @@ class ProductItem extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 20),
           child: Center(
             child: CircleAvatar(
-              child: Icon(Icons.access_alarm),
+              child: InkWell(
+                onTap: () => productsData.isFavouriteToggle(),
+                child: Icon(
+                  productsData.isFavourite
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                ),
+              ),
               backgroundColor: Colors.white,
             ),
           ),
